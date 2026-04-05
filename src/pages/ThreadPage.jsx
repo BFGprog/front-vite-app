@@ -6,7 +6,8 @@ import AddComment from "../thread/AddComments"
 import { useNavigate } from "react-router-dom"
 
 
-const API_URL = "http://localhost:8080"
+//const API_URL = "http://localhost:8080"
+const API_URL = ""
 
 const ThreadPage = () => {
   const navigate = useNavigate()
