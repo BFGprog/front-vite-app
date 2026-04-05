@@ -21,7 +21,7 @@ export default function AddThread() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch(`${API_URL}/thread`, {
+        fetch(`${API_URL}/thread/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
