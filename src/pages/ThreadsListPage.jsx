@@ -7,12 +7,12 @@ import { Link } from "react-router-dom"
 const ThreadsList = () => {
 
 //const API_URL = "http://localhost:8080"
-const API_URL = "/api"
+const API_URL = ""
 
   const [threads, setThreads] = useState([])
 
   useEffect(() => {
-    fetch(`${API_URL}/thread`)
+    fetch(`${API_URL}/thread/`)
       .then(res => res.json())
       .then(data => setThreads(data))
       .catch(console.error)
