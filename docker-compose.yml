@@ -5,7 +5,7 @@ services:
     build: .
     container_name: frontend
     ports:
-      - "9002:80"
+      - "9002:9002"
     restart: unless-stopped
     networks:
       - backend
