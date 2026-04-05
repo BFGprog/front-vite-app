@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 export default function AddThread() {
 
     //const API_URL = "http://localhost:8080"
-    const API_URL = ""
+    const API_URL = "/api"
     const navigate = useNavigate()
     
     const [form, setForm] = useState({

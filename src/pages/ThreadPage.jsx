@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 
 //const API_URL = "http://localhost:8080"
-const API_URL = ""
+const API_URL = "/api"
 
 const ThreadPage = () => {
   const navigate = useNavigate()

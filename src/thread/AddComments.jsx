@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom"
 
 export default function AddComment({ threadId, onAdd }) {
     //const API_URL = "http://localhost:8080"
-    const API_URL = ""
+    const API_URL = "/api"
     const navigate = useNavigate()
 
     const [form, setForm] = useState({
