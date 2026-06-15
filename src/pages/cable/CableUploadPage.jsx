@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function CablePage() {
+export default function CableUploadPage() {
   const [file, setFile] = useState(null);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");

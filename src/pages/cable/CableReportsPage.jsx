@@ -62,14 +62,14 @@ export default function CableReportsPage() {
       <br /> <br />
 
       <button onClick={downloadJournal}>
-        Скачать журнал
+        Скачать Кабельный журнал
       </button>
+
+      <br /><br />
 
       <button onClick={loadReports}>
         Загрузить отчёты
       </button>
-
-      <br /> <br />
 
       <select
         value={selected}
