@@ -65,7 +65,7 @@ export default function CableReportsPage() {
         Скачать Кабельный журнал
       </button>
 
-      <br /><br />
+      <br /> <br />
 
       <button onClick={loadReports}>
         Загрузить отчёты
