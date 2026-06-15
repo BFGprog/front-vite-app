@@ -3,9 +3,6 @@ import ThreadsList from './pages/ThreadsListPage'
 import Home from './pages/Home'
 import ThreadPage from './pages/ThreadPage'
 
-import CablePage from "./pages/cable/CablePage";
-import CableReportsPage from "./pages/cable/CableReportsPage";
-
 import NotFoundPage from "./pages/NotFoundPage"
 
 
