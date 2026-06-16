@@ -3,6 +3,7 @@ import ThreadsList from './pages/ThreadsListPage'
 import Home from './pages/Home'
 import ThreadPage from './pages/ThreadPage'
 
+import CableMainPage from "./pages/cable/CableMainPage";
 
 import NotFoundPage from "./pages/NotFoundPage"
 
