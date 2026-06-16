@@ -25,7 +25,7 @@ export default function CableReportsPage() {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "journal.xlsx";
+    a.download = "Кабельный журнал.xlsx";
     a.click();
   };
 
