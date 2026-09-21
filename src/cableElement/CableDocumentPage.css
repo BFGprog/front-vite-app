@@ -1,0 +1,230 @@
+.cable-document {
+  box-sizing: border-box;
+}
+
+.cable-document *,
+.cable-document *::before,
+.cable-document *::after {
+  box-sizing: border-box;
+}
+
+/* Общие элементы */
+
+.cable-document button {
+  padding: 6px 11px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #eee;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cable-document button:hover:not(:disabled) {
+  background: #ddd;
+}
+
+.cable-document button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.cable-document input[type="text"],
+.cable-document input[type="number"],
+.cable-document input[type="date"],
+.cable-document input[type="password"],
+.cable-document select {
+  height: 32px;
+  padding: 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cable-document input[type="file"] {
+  padding: 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cable-document h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.cable-document h3 {
+  margin: 0 0 8px;
+}
+
+/* Details */
+
+.cable-document.section {
+  padding: 0;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+}
+
+.cable-document.section summary {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.cable-document.section[open] summary {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cable-document .section-content {
+  padding: 0 15px 15px;
+}
+
+/* Upload row */
+
+.cable-document .upload-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* Password */
+
+.cable-document .upload-password-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.cable-document .upload-password-row label {
+  font-weight: bold;
+}
+
+.cable-document .upload-password-row input {
+  width: 190px;
+}
+
+/* Main form */
+
+.cable-document .cable-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cable-document .form-block {
+  padding: 9px 11px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.cable-document .form-block h3 {
+  margin-bottom: 7px;
+  font-size: 15px;
+}
+
+/* Order */
+
+.cable-document .order-fields {
+  display: grid;
+  grid-template-columns: 145px 360px;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+}
+
+.cable-document .order-fields label {
+  font-weight: bold;
+}
+
+.cable-document .order-fields input {
+  width: 100%;
+}
+
+.cable-document .order-fields select {
+  width: 100%;
+  min-width: 360px;
+}
+
+/* Document */
+
+.cable-document .document-fields {
+  display: grid;
+  grid-template-columns: 145px 360px;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+}
+
+.cable-document .document-fields label {
+  font-weight: bold;
+}
+
+.cable-document .document-fields input,
+.cable-document .document-fields select {
+  width: 100%;
+}
+
+/* Manual mode */
+
+.cable-document .manual-toggle {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal !important;
+  cursor: pointer;
+}
+
+.cable-document .manual-toggle input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+/* Prepared file */
+
+.cable-document .prepared-file-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Status */
+
+.cable-document .cable-document-status {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #eee;
+  white-space: pre-wrap;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .cable-document .document-fields,
+  .cable-document .order-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .cable-document .order-fields select {
+    min-width: 0;
+  }
+
+  .cable-document .upload-password-row,
+  .cable-document .prepared-file-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

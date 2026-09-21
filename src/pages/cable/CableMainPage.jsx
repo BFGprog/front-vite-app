@@ -6,7 +6,7 @@ export default function CableMainPage() {
     <div>
       <CableUploadPage />
 
-      <hr />
+      <CableDocumentPage />
 
       <CableReportsPage />
     </div>
