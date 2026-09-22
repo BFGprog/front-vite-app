@@ -21,11 +21,11 @@ const EMPTY_DOCUMENT = {
   documentApprovalStage: "BEFORE_APPROVAL",
 };
 
-export default function CableDocumentPage() {
+export default function CableDocumentPage({
+    uploadPassword,
+    setUploadPassword,
+  }) {
     
-  // Пароль
-
-  const [uploadPassword, setUploadPassword] = useState("");
 
   // Заказы
   // Старый JS:
@@ -418,7 +418,7 @@ export default function CableDocumentPage() {
 
             <div className="order-fields">
               <label htmlFor="shipSelect">
-                Заказ из базы:
+                Загруженные заказы:
               </label>
 
               <select
@@ -522,7 +522,7 @@ export default function CableDocumentPage() {
               />
 
               <label htmlFor="projectName">
-                Название проекта:
+                Проектное наименование:
               </label>
 
               <input
@@ -547,7 +547,7 @@ export default function CableDocumentPage() {
 
             <div className="document-fields">
               <label htmlFor="journalSelect">
-                Документ из базы:
+                Загруженные документы:
               </label>
 
               <select
@@ -616,7 +616,7 @@ export default function CableDocumentPage() {
               />
 
               <label htmlFor="notice">
-                Примечание:
+                Номер извещения:
               </label>
 
               <input
@@ -633,7 +633,7 @@ export default function CableDocumentPage() {
               />
 
               <label htmlFor="noticeDate">
-                Дата примечания:
+                Дата извещения:
               </label>
 
               <input
@@ -653,7 +653,7 @@ export default function CableDocumentPage() {
                 Статус:
               </label>
 
-              <input
+              <select
                 id="actualStatus"
                 type="number"
                 value={selectedDocument.actualStatus}
@@ -664,7 +664,10 @@ export default function CableDocumentPage() {
                     actualStatus: event.target.value,
                   }))
                 }
-              />
+              >
+                <option value="1">Актуальный</option>
+                <option value="2">Не актуальный</option>
+              </select>
 
               <label htmlFor="documentType">
                 Тип документа:
@@ -681,7 +684,7 @@ export default function CableDocumentPage() {
                   }))
                 }
               >
-                <option value="1">Все</option>
+                <option value="1">Весь</option>
                 <option value="2">Часть</option>
               </select>
 

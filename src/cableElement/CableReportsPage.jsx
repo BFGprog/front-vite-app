@@ -224,8 +224,8 @@ export default function CableReportsPage() {
     const type = String(reportForm.type).trim();
     const query = reportForm.query.trim();
 
-    if (!name || !num || !type || !query) {
-      window.alert("Заполните все поля");
+    if (!name || !query) {
+      window.alert("Заполните все поля Наименования и Запроса");
       return;
     }
 
