@@ -22,6 +22,7 @@ export default function CableUploadPage({ uploadPassword }) {
     return password;
   };
 
+  
   const uploadFile = async (url, file, code) => {
     const formData = new FormData();
 
@@ -36,12 +37,101 @@ export default function CableUploadPage({ uploadPassword }) {
     const text = await response.text();
 
     if (!response.ok) {
-      throw new Error(text);
+      throw new Error(text || "Ошибка загрузки файла");
     }
 
     return text;
   };
 
+  
+  const uploadCableWord = async (file, code) => {
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("code", code);
+
+    const response = await fetch(
+      `${API_BASE}/uploadCableWord`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    
+    if (!response.ok) {
+      const text = await response.text();
+
+      throw new Error(
+        text || "Ошибка обработки кабельного журнала"
+      );
+    }
+
+    
+    const blob = await response.blob();
+
+    
+    let fileName = "cable_journal.xlsx";
+
+    const disposition =
+      response.headers.get("Content-Disposition");
+
+    if (disposition) {
+      
+      const utf8Match = disposition.match(
+        /filename\*=UTF-8''([^;]+)/i
+      );
+
+      if (utf8Match) {
+        try {
+          fileName = decodeURIComponent(
+            utf8Match[1]
+          );
+        } catch {
+          fileName = utf8Match[1];
+        }
+      } else {
+        
+        const normalMatch =
+          disposition.match(
+            /filename="?([^"]+)"?/i
+          );
+
+        if (normalMatch) {
+          fileName = normalMatch[1];
+        }
+      }
+    }
+
+    
+    const downloadUrl =
+      window.URL.createObjectURL(blob);
+
+      
+    const link =
+      document.createElement("a");
+
+    link.href = downloadUrl;
+    link.download = fileName;
+    link.style.display = "none";
+
+    document.body.appendChild(link);
+
+    
+    link.click();
+
+    
+    document.body.removeChild(link);
+
+    
+    setTimeout(() => {
+      window.URL.revokeObjectURL(downloadUrl);
+    }, 1000);
+
+    return "Кабельный журнал обработан. Excel-файл скачан.";
+  };
+
+  
   const handleUpload = async ({
     file,
     endpoint,
@@ -62,11 +152,60 @@ export default function CableUploadPage({ uploadPassword }) {
     try {
       setStatus(loadingMessage);
 
-      const result = await uploadFile(endpoint, file, code);
+      const result =
+        await uploadFile(
+          endpoint,
+          file,
+          code
+        );
 
       setStatus(result);
     } catch (error) {
-      setStatus(`Ошибка: ${error.message}`);
+      console.error(error);
+
+      setStatus(
+        `Ошибка: ${
+          error?.message ||
+          "Неизвестная ошибка"
+        }`
+      );
+    }
+  };
+
+  
+  const handleCableWordUpload = async () => {
+    if (!cableWordFile) {
+      window.alert("Выберите Word-файл");
+      return;
+    }
+
+    const code = getUploadPassword();
+
+    if (!code) {
+      return;
+    }
+
+    try {
+      setStatus(
+        "Загрузка кабельного журнала..."
+      );
+
+      const result =
+        await uploadCableWord(
+          cableWordFile,
+          code
+        );
+
+      setStatus(result);
+    } catch (error) {
+      console.error(error);
+
+      setStatus(
+        `Ошибка: ${
+          error?.message ||
+          "Ошибка обработки кабельного журнала"
+        }`
+      );
     }
   };
 
@@ -75,6 +214,10 @@ export default function CableUploadPage({ uploadPassword }) {
       <summary>Загрузка файлов</summary>
 
       <div className="section-content">
+
+        {/* ========================= */}
+        {/* КАБЕЛЬНАЯ ВЕДОМОСТЬ */}
+        {/* ========================= */}
 
         <div className="upload-row">
           <label htmlFor="cableFile">
@@ -86,7 +229,9 @@ export default function CableUploadPage({ uploadPassword }) {
             id="cableFile"
             accept=".xlsx,.xls"
             onChange={(event) =>
-              setCableFile(event.target.files?.[0] ?? null)
+              setCableFile(
+                event.target.files?.[0] ?? null
+              )
             }
           />
 
@@ -98,13 +243,18 @@ export default function CableUploadPage({ uploadPassword }) {
                 endpoint: "/upload",
                 loadingMessage:
                   "Загрузка кабельной ведомости...",
-                noFileMessage: "Выберите файл",
+                noFileMessage:
+                  "Выберите файл",
               })
             }
           >
             Загрузить
           </button>
         </div>
+
+        {/* ========================= */}
+        {/* СКЛАД */}
+        {/* ========================= */}
 
         <div className="upload-row">
           <label htmlFor="warehouseFile">
@@ -116,7 +266,9 @@ export default function CableUploadPage({ uploadPassword }) {
             id="warehouseFile"
             accept=".xlsx,.xls"
             onChange={(event) =>
-              setWarehouseFile(event.target.files?.[0] ?? null)
+              setWarehouseFile(
+                event.target.files?.[0] ?? null
+              )
             }
           />
 
@@ -126,14 +278,20 @@ export default function CableUploadPage({ uploadPassword }) {
               handleUpload({
                 file: warehouseFile,
                 endpoint: "/upload1",
-                loadingMessage: "Загрузка склада...",
-                noFileMessage: "Выберите файл",
+                loadingMessage:
+                  "Загрузка склада...",
+                noFileMessage:
+                  "Выберите файл",
               })
             }
           >
             Загрузить
           </button>
         </div>
+
+        {/* ========================= */}
+        {/* ЗАМЕНА ИНДЕКСОВ */}
+        {/* ========================= */}
 
         <div className="upload-row">
           <label htmlFor="indexReplaceFile">
@@ -145,7 +303,9 @@ export default function CableUploadPage({ uploadPassword }) {
             id="indexReplaceFile"
             accept=".xlsx,.xls"
             onChange={(event) =>
-              setIndexReplaceFile(event.target.files?.[0] ?? null)
+              setIndexReplaceFile(
+                event.target.files?.[0] ?? null
+              )
             }
           />
 
@@ -157,13 +317,18 @@ export default function CableUploadPage({ uploadPassword }) {
                 endpoint: "/upload2",
                 loadingMessage:
                   "Загрузка замены индексов...",
-                noFileMessage: "Выберите файл",
+                noFileMessage:
+                  "Выберите файл",
               })
             }
           >
             Загрузить
           </button>
         </div>
+
+        {/* ========================= */}
+        {/* WORD → EXCEL */}
+        {/* ========================= */}
 
         <div className="upload-row">
           <label htmlFor="cableWordFile">
@@ -175,25 +340,23 @@ export default function CableUploadPage({ uploadPassword }) {
             id="cableWordFile"
             accept=".docx,.doc"
             onChange={(event) =>
-              setCableWordFile(event.target.files?.[0] ?? null)
+              setCableWordFile(
+                event.target.files?.[0] ?? null
+              )
             }
           />
 
           <button
             type="button"
-            onClick={() =>
-              handleUpload({
-                file: cableWordFile,
-                endpoint: "/uploadCableWord",
-                loadingMessage:
-                  "Загрузка кабельного журнала...",
-                noFileMessage: "Выберите Word-файл",
-              })
-            }
+            onClick={handleCableWordUpload}
           >
             Загрузить
           </button>
         </div>
+
+        {/* ========================= */}
+        {/* СТАТУС */}
+        {/* ========================= */}
 
         <div className="cable-upload-status">
           {status}
