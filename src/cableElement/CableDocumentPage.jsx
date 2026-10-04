@@ -16,7 +16,7 @@ const EMPTY_DOCUMENT = {
   journalNum: "",
   notice: "",
   noticeDate: "",
-  actualStatus: 0,
+  actualStatus: 1,
   documentType: 1,
   documentApprovalStage: "BEFORE_APPROVAL",
 };
@@ -666,7 +666,7 @@ export default function CableDocumentPage({
                 }
               >
                 <option value="1">Актуальный</option>
-                <option value="2">Не актуальный</option>
+                <option value="0">Не актуальный</option>
               </select>
 
               <label htmlFor="documentType">
